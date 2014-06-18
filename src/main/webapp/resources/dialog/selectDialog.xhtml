@@ -1,0 +1,26 @@
+<!DOCTYPE html>  
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"   
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:em="http://java.sun.com/jsf/composite/ezcomp"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">  
+      
+    <h:head>  
+        <title>Create input</title>  
+    </h:head>  
+      
+    <h:body>  
+         <p:dialog header="Add component" hideEffect="fold" showEffect="fade" dynamic="true" widgetVar="createSelectWidget" id="createSelect">
+            <h:form id="create-select-component">
+                <em:baseData actionListener="#{componentController.addInput}" componentId="#{componentController.component.id}" labelText="#{componentController.component.labelText}"
+                             process=":create-select-component" required="#{componentController.component.required}" requiredMessage="#{componentController.component.requiredMessage}"
+                             update=":component-form:component-grid" oncomplete="PF('createSelectWidget').hide()"> 
+                    <h:outputText value="Values (separated with ; ):"/>
+                    <p:inputTextarea value="#{componentController.component.values}" required="true" requiredMessage="Fill the values!" validatorMessage="Only english letters allowed!">
+                        <f:validateRegex pattern="[[\w];[\w]]+"/>
+                    </p:inputTextarea>
+                </em:baseData>
+            </h:form>
+        </p:dialog>
+    </h:body>  
+</html> 

@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="labelText" required="true"/>
+        <cc:attribute name="componentId" required="true"/>
+        <cc:attribute name="required" required="true"/>
+        <cc:attribute name="requiredMessage" required="true"/>
+        <cc:attribute name="process" required="true"/>
+        <cc:attribute name="update" required="true"/>
+        <cc:attribute name="oncomplete"/>
+        <cc:attribute name="actionListener" method-signature="java.lang.String action()"/>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <h:panelGrid columns="2">
+            <h:outputText value="Id: "/>                          
+            <p:inputText value="#{cc.attrs.componentId}" required="true" requiredMessage="Fill the Id!" validatorMessage="The Id can be number and/or letter!">
+                <f:validateRegex pattern="[a-zA-z0-9]*"/>
+            </p:inputText>
+            <h:outputText value="Label: "/>
+            <p:inputText value="#{cc.attrs.labelText}" required="true" requiredMessage="Fill the label!"/>
+            <h:outputText value="Required? "/>
+            <p:selectBooleanCheckbox value="#{cc.attrs.required}"/>
+            <h:outputText value="Required message "/>
+            <p:inputText value="#{cc.attrs.requiredMessage}"/>
+            <cc:insertChildren/>
+            <h:outputText value=""/>
+            <p:commandButton value="Create component" action="#{cc.attrs.actionListener}" 
+                             process="#{cc.attrs.process}" update="#{cc.attrs.update}"
+                             oncomplete="#{cc.attrs.oncomplete}"/>
+        </h:panelGrid>
+    </cc:implementation>
+</html>

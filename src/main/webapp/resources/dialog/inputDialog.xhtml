@@ -1,0 +1,20 @@
+<!DOCTYPE html>  
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"   
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:em="http://java.sun.com/jsf/composite/ezcomp">  
+      
+    <h:head>  
+        <title>Create input</title>  
+    </h:head>  
+      
+    <h:body>  
+         <p:dialog header="Add component" hideEffect="fold" showEffect="fade" dynamic="true" widgetVar="createInputWidget" id="createInput">
+            <h:form id="create-input-component">
+                <em:baseData actionListener="#{componentController.addInput}" componentId="#{componentController.component.id}" labelText="#{componentController.component.labelText}"
+                             process=":create-input-component" required="#{componentController.component.required}" requiredMessage="#{componentController.component.requiredMessage}"
+                             update=":component-form:component-grid" oncomplete="PF('createInputWidget').hide()"/>
+            </h:form>
+        </p:dialog>
+    </h:body>  
+</html> 
